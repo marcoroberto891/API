@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
-from agendapi.models import Usuario, Tipo, Agenda , Compromisso , AgendaCompromisso
+from agendapi.models import Usuario, Tipo, Agenda , Compromisso , AgendaCompromisso , AgendaUsuario
 
 
 # serialers define API  representation.
@@ -17,6 +17,7 @@ class TiposSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'nome', 'descricao',)
 
 class AgendaSerializer(serializers.HyperlinkedModelSerializer):
+    #usuario = UserSerializer(many=False)
     class Meta:
         model = Agenda
         fields = ('id', 'visivel', 'usuario', 'usercreator', 'tipo', 'institucional',)
@@ -30,4 +31,14 @@ class AgendaCompromissoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = AgendaCompromisso
         fields = ('id', 'agenda', 'compromisso', 'usuarios', 'compartilhar', 'useradmin' ,'checkin',)
+
+class AgendaCompromissoSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = AgendaCompromisso
+        fields = ('id', 'agenda', 'compromisso', 'usuarios', 'compartilhar', 'useradmin' ,'checkin',)
+
+class AgendaUsuarioSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = AgendaUsuario
+        fields = ('id', 'agenda', 'usuarios', 'compartilhar', 'useradmin' ,)
 

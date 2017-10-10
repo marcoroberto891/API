@@ -5,8 +5,8 @@ from django.http import HttpResponse
 from rest_framework import routers, serializers, viewsets
 from django.contrib.auth.models import User
 from agendapi.serializers import UserSerializer, TiposSerializer , AgendaSerializer , CompromissoSerializer
-from agendapi.serializers import AgendaCompromissoSerializer
-from agendapi.models import Tipo, Usuario ,Agenda , Compromisso , AgendaCompromisso
+from agendapi.serializers import AgendaCompromissoSerializer , AgendaUsuarioSerializer
+from agendapi.models import Tipo, Usuario ,Agenda , Compromisso , AgendaCompromisso , AgendaUsuario
 
 
 def listaTipos(request):
@@ -39,4 +39,8 @@ class CompromissoViewSet(viewsets.ModelViewSet):
 class AgendaCompromissoViewSet(viewsets.ModelViewSet):
     queryset = AgendaCompromisso.objects.all()
     serializer_class = AgendaCompromissoSerializer
+
+class AgendaUsuarioViewSet(viewsets.ModelViewSet):
+    queryset = AgendaUsuario.objects.all()
+    serializer_class = AgendaUsuarioSerializer
 
