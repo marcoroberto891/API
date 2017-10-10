@@ -19,12 +19,14 @@ from django.conf.urls import url
 from django.contrib import admin
 from agendapi.models import Tipo
 from rest_framework import routers, serializers, viewsets
-from agendapi.views import UsersViewSet,TiposViewSet
+from agendapi.views import UsersViewSet, TiposViewSet, AgendaViewSet , CompromissoViewSet , AgendaCompromissoViewSet
 
 router = routers.DefaultRouter()
 router.register(r'USERS', UsersViewSet)
 router.register(r'TIPOS', TiposViewSet)
-
+router.register(r'AGENDA', AgendaViewSet)
+router.register(r'COMPROMISSO', CompromissoViewSet)
+router.register(r'AGENDADECOMPROMISSO', AgendaCompromissoViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),

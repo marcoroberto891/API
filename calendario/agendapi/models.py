@@ -13,6 +13,7 @@ class Usuario(models.Model):
 
 class Tipo(models.Model):
     nome = models.CharField('nome', max_length=50)
+    descricao = models.CharField('descricao', max_length=50)
 
     def __str__(self):
         return self.nome
@@ -21,7 +22,8 @@ class Tipo(models.Model):
 class Agenda(models.Model):
     visivel = models.BooleanField(blank=True)
     usuario = models.ForeignKey(Usuario, related_name='users', null=True, blank=False)
-    tipo = models.ForeignKey(Tipo, related_name='tipos', null=True, blank=False)
+    usercreator = models.BooleanField(blank=True)##usuario que criou a agenda
+    tipo = models.ForeignKey(Tipo, related_name='TipoAgenda', null=True, blank=False)
     institucional = models.BooleanField(blank=True)
 
     def __str__(self):
@@ -30,15 +32,15 @@ class Agenda(models.Model):
 
 class Compromisso(models.Model):
     nome = models.CharField('nome', max_length=50)
-    datahorainicial = models.DateTimeField(blank=True, null=True)
-    datahorafim = models.DateTimeField()
+    datahorainicial = models.DateField(blank=True, null=True)
+    datahorafim = models.DateField()
     agenda = models.ForeignKey(Agenda, related_name='compromissos', null=True, blank=False)
 
     def __str__(self):
         return self.nome
 
 
-class agendaCompromisso(models.Model):
+class AgendaCompromisso(models.Model):
     agenda = models.ForeignKey(Agenda, related_name="agendadecompromissos", null=True, blank=False)
     compromisso = models.ForeignKey(Compromisso, related_name='agendacomp', null=True, blank=False)
     usuarios = models.ForeignKey(Usuario, related_name='usersagendacomp1', null=True, blank=False)
@@ -50,7 +52,7 @@ class agendaCompromisso(models.Model):
         return self.nome
 
 
-class agendaUsuario(models.Model):
+class AgendaUsuario(models.Model):
     agenda = models.ForeignKey(Agenda, related_name="agendacompromissos", null=True, blank=False)
     usuarios = models.ForeignKey(Usuario, related_name='usersagendacomp2', null=True, blank=False)
     compartilhar = models.BooleanField(blank=True)  ## permissao para visualizar
