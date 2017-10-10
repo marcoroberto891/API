@@ -3,16 +3,16 @@ from django.db import models
 
 # Create your models here.
 
-class Tipo(models.Model):
+class Usuario(models.Model):
     nome = models.CharField('nome', max_length=50)
+    senha = models.CharField('senha', max_length=6)
 
     def __str__(self):
         return self.nome
 
 
-class Usuario(models.Model):
+class Tipo(models.Model):
     nome = models.CharField('nome', max_length=50)
-    senha = models.CharField('nome', max_length=6)
 
     def __str__(self):
         return self.nome

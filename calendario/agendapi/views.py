@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from rest_framework import routers, serializers, viewsets
 from django.contrib.auth.models import User
 from agendapi.serializers import UserSerializer
-from agendapi.models import Tipo
+from agendapi.models import Tipo, Usuario
 
 
 def listaTipos(request):
@@ -17,6 +17,11 @@ def listaTipos(request):
 
 
 # ViewSets
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
+class UsersViewSet(viewsets.ModelViewSet):
+    queryset = Usuario.objects.all()
+    serializer_class = UserSerializer
+
+
+class TiposViewSet(viewsets.ModelViewSet):
+    queryset = Tipo.objects.all()
     serializer_class = UserSerializer
