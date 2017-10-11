@@ -17,7 +17,13 @@ class TiposSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'nome', 'descricao',)
 
 class AgendaSerializer(serializers.HyperlinkedModelSerializer):
-    #usuario = UserSerializer(many=False)
+    usuario = UserSerializer(many=True)
+    class Meta:
+        model = Agenda
+        fields = ('id', 'visivel', 'usuario', 'usercreator', 'tipo', 'institucional',)
+
+class AgendaSerializerbyUser(serializers.HyperlinkedModelSerializer):
+    usuario = UserSerializer(many=False)
     class Meta:
         model = Agenda
         fields = ('id', 'visivel', 'usuario', 'usercreator', 'tipo', 'institucional',)
